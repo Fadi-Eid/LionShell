@@ -1,15 +1,33 @@
-# LionShell
-Simple Shell that runs on a native Linux shell.
-This code is a basic implementation of a shell program that provides a command-line interface to the user. Here is a brief description of the functions and features of this code:
+## LionShell – A Custom Minimalist Linux Shell
+LionShell is a simple yet functional command-line shell implemented in C. It provides a basic interface to interact with the Linux operating system, mimicking essential features of a typical Unix shell. Designed as a learning project, LionShell demonstrates key concepts like command parsing, process creation, I/O redirection, and piping.
 
-The main function initializes various variables required for the shell program and enters an infinite loop until the user types the "exit" command.
-The program prompts the user for input using a red-colored text string: "LionShell >"
-The getCommand() function reads the input from the user and stores it in the variable 'command' until the user presses the Enter key. The function returns -1 if the input is empty or exceeds the maximum allowed size.
-The program checks if the user has entered any special operator (!!)-> History, and executes the last command from the history if the user has entered '!!'.
-The command is stored in the 'history' variable.
-The parseCommand() function takes the 'command' string and splits it into an array of arguments. The function returns -1 if there is an error in parsing the command.
-The program checks for special commands like 'clear', 'exit', and 'help'. If the user enters any of these commands, the program takes appropriate action, like clearing the console or terminating the shell program.
-The program checks for concurrency using the '&' symbol and launches a separate process for the command if concurrency is detected.
-The program checks for special operators like '|', '<', '>', and '>>' and takes appropriate action based on the operator found in the command.
-If the user enters an invalid command, the program prints an error message and waits for the user to enter a valid command.
-Overall, this code provides a basic implementation of a shell program that allows the user to enter commands, executes them, and provides a few additional features like command history and concurrency.
+## Features
+* Command Execution: Runs standard Linux commands with support for arguments.
+* Prompt: Custom red-colored prompt LionShell >.
+* History (!!): Recall and re-execute the last command.
+
+## Built-in Commands:
+
+* exit: Terminates the shell.
+* clean: Clears the terminal.
+* help: Displays a help message.
+* Concurrency (&): Execute commands in the background.
+* Pipes (|): One-level piping between two commands.
+
+## I/O Redirection:
+* Input (<)
+* Output overwrite (>)
+* Output append (>>) (not currently implemented)
+
+## Basic Error Handling: 
+* Safe recovery from parsing and execution errors.
+* Memory used by dynamic parsing is freed after each command.
+
+⚠️ Multiple pipes and combined I/O redirection with pipes are not supported in this version.
+
+## How It Works
+1. The shell continuously prompts the user until exit is typed.
+2. User input is parsed into commands and arguments.
+3. Special symbols like |, <, >, and & are detected and handled accordingly.
+4. The shell uses fork() and execvp() to create child processes for command execution.
+
